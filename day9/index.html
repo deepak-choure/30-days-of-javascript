@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script.js"></script>
+    <style>
+        .container{
+            height: 100%;
+            width: 100%;
+            border: solid 2px black;
+            padding:3px;
+        }
+        .activity{
+            padding:8px;
+            background-color: crimson;;
+            color: white;
+            border-radius: 3px;
+            margin:2px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+
+        }
+        .box, .removeIt{
+            height: 90px;
+            width: 120px;
+            margin: 3px;
+            border-radius: 3px;
+            background-color: beige;
+            color:black;
+            padding:2px;
+            border: 5px solid lightblue;
+            
+        }
+        button{
+            height: 35px;
+            width: 80px;
+            background-color:darkorange;
+            border: 2px solid brown;
+            border-radius: 9px;
+            padding-bottom:3px;
+            color: white;
+            font-weight: 700;
+            position: relative;
+           
+
+            
+            
+        }
+        .image{
+            box-shadow: 10px 10px 5px lightblue;;
+            border:2px solid black;
+            border-radius: 9px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="activity" id="act1">For Activity 1
+            <div id="task1oldtext">Old text</div>
+            <button onclick={change()}>Change text</button>
+            <div class="box" >box</div>
+            <button onclick={changeBg()}>Change bg color</button>
+        </div>
+        <div class="activity" id="act2">For Activity 2
+            <ul>
+                <li>Monday</li>
+                <li>Tuesday</li>
+                <li>Wednesday</li>
+                <li>Thursday</li>
+            </ul>
+            <button onclick={addElement()}>
+                add element
+            </button>
+        </div>
+        <div class="activity" id="act3">for Activity 3
+            <div class="removeIt">Remove me</div>
+            <ul id="list2">
+                <li>first child</li>
+                <li>2nd child</li>
+                <li>3rd child</li>
+                <li>4th child</li>
+            </ul>
+            <button onclick={removeIt()}>Remove</button>
+        </div>
+        <div class="activity">for activity 4
+            <img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop">
+            <button onclick={changeImage()}>Change src</button>
+            <button onclick={addcss()}>Add CSS</button>
+            <button onclick={removecss()}>Remove CSS</button>
+        </div>
+        <div class="activity">for Activity 5
+            <p id="mytext">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias rem hic perferendis voluptatibus vitae esse atque. Modi perferendis id possimus facilis quos libero!</p>
+           
+            <button id="change">change Content</button>
+            <div id="box" class="box" ></div>
+        </div>
+    </div>
+</body>
+<script>
+    //Activity 1
+    //task1
+    function change(){
+        document.getElementById("task1oldtext").innerHTML = "new text"
+    }
+
+    //task 2
+    function changeBg(){
+        document.getElementsByClassName("box")[0].style.backgroundColor = "cyan"
+    }
+
+    //task 3and 4
+    function addElement(){
+        let parent = document.querySelector("#act2")
+        let child = document.createElement("div")
+        let textnode = document.createTextNode("Hii I am added element")
+        child.append(textnode)
+        parent.append(child);
+        
+        let list = document.querySelector("ul");
+        let newli = document.createElement("li")
+        let textli = document.createTextNode("day after upper day")
+        newli.append(textli);
+        list.append(newli);
+    }
+
+    //act 3
+    function removeIt(){
+        let box = document.querySelector(".removeIt")
+        box.remove();
+        let ul = document.querySelector("#list2");
+        let lastchld = ul.querySelector("li:last-child")
+        ul.removeChild(lastchld)
+    }
+    function changeImage(){
+        document.querySelector("#photoshop").src = "https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+        console.log("chane")
+    }
+    function addcss(){
+        document.querySelector("img").setAttribute("class","image")
+    }
+    function removecss(){
+        document.querySelector("img").removeAttribute("class","image")
+    }
+
+    document.querySelector("#change").addEventListener("click",()=>{
+        console.log("ellh")
+       changetext();
+    })
+    function changetext(){
+        document.querySelector("#mytext").innerHTML="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+    }
+
+    document.querySelector("#box").addEventListener("mouseover",(e)=>{
+        e.target.style.border = " 5px solid blue"
+       
+    })
+    document.querySelector("#box").addEventListener("mouseout", (e)=>{
+    
+    // Resetting the border color on mouseout
+    e.target.style.border = "";
+});
+
+</script>
+</html>
