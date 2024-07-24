@@ -1,26 +1,26 @@
 //activity 1
 //task 1
-function myFn() {
+function error() {
   try {
     throw new Error();
   } catch (err) {
     console.error(`Some ERROR occured : ${err}`);
   }
 }
-myFn();
+// error();
 
 //task 2
 function divide(a, b) {
   try {
     if (b == 0) {
-      throw new Error();
+      throw new Error("Can't divide from 0");
     }
     return a / b;
   } catch (error) {
-    console.error(`Error occured in division try putting appropriate value `);
+    console.error(`Error occured in division ${error} `);
   }
 }
-console.log(divide(2, 0));
+// console.log(divide(2, 0));
 
 //Activity 2
 function temp() {
@@ -38,7 +38,7 @@ function temp() {
     );
   }
 }
-temp();
+// temp();
 
 //Activity 3
 //task 4
@@ -50,7 +50,7 @@ class CustomError extends Error {
   }
 }
 function letsThrowCustomError() {
-  throw new CustomError(`CustomERRor from letsThrowCustomError function`);
+  throw new CustomError(`CustomERRor from  function`);
 }
 
 //try catch
@@ -66,7 +66,7 @@ try {
 function validateUserInput(input) {
   try {
     if(input.length == 0){
-        throw new CustomError("Invalid Input ")
+        throw new CustomError(" Input is Empty ")
     }
     console.log(`Input validated successfully`)
 
@@ -74,21 +74,21 @@ function validateUserInput(input) {
     console.log(`Error occured while validating input,Error:${error.message}`)
   }
 }
-validateUserInput("")
+// validateUserInput("")
 //Activity 4
 //task 6
 new Promise((resolve, reject) => {
   if (Math.random() > 0.5) {
-    resolve(`Promise Resolved randomly`);
+    resolve(`Promise Resolved `);
   } else {
-    reject(`Promise rejected randomly`);
+    reject(`Promise rejected `);
   }
 })
   .then((message) => {
     console.log(`Message From task 6 Promise: ${message}`);
   })
-  .catch((message) => {
-    console.log(`Message from task 6 Promise: ${message}`);
+  .catch((err) => {
+    console.log(`Message from task 6 Promise: ${err}`);
   });
 
 //task 7
@@ -96,9 +96,9 @@ async function handleError() {
   try {
     let response = await new Promise((resolve, reject) => {
       if (Math.random() > 0.5) {
-        resolve(`Promise Resolved randomly`);
+        resolve(`Promise Resolved `);
       } else {
-        reject(`Promise rejected randomly`);
+        reject(`Promise rejected `);
       }
     });
     console.log(`Task 7 response: ${response}`);
@@ -106,20 +106,20 @@ async function handleError() {
     console.error(`Error resolving the promise of task 7 :${error}`);
   }
 }
-handleError();
+// handleError();
 
 //Activity 5
 //task 8
 fetch("https://jsonplaceholder.com/users")
   .then((response) => {
-    let data = response.json();
-    data
-      .then((data) => {
-        console.log(data[0]);
-      })
-      .catch((err) => {
-        console.log(`Invalid data `);
-      });
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error(`Inappropriate Response`);
+    }
+  })
+  .then((response) => {
+    console.log(response[0].name);
   })
   .catch((message) => {
     console.error(`Error fetching data from given url : ${message}`);
@@ -131,7 +131,7 @@ async function FetchDAta() {
     let data = await response.json();
     console.log(data[0]);
   } catch (err) {
-    console.error(`Error fetching data from given url : ${message}`);
+    console.error(`Error fetching data from given url : ${err}`);
   }
 }
-FetchDAta();
+// FetchDAta();
